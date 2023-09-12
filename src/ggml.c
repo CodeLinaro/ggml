@@ -299,27 +299,17 @@ typedef double ggml_float;
 
 #else
 
-#ifdef __wasm_simd128__
+#if defined(__wasm_simd128__)
 #include <wasm_simd128.h>
-#else
-#ifdef __POWER9_VECTOR__
+#elif defined(__POWER9_VECTOR__)
 #include <altivec.h>
 #undef bool
 #define bool _Bool
-#else
-#if defined(_MSC_VER) || defined(__MINGW32__)
+#elif defined(_MSC_VER) || defined(__MINGW32__)
 #include <intrin.h>
-#else
-#if defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__) || defined(__SSSE3__) || defined(__SSE3__)
-#if !defined(__riscv)
+#elif defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__) || defined(__SSSE3__) || defined(__SSE3__)
 #include <immintrin.h>
-#endif
-#endif
-#endif
-#endif
-#endif
-
-#ifdef __riscv_v_intrinsic
+#elif defined(__riscv_v_intrinsic)
 #include <riscv_vector.h>
 #endif
 
