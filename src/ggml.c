@@ -311,6 +311,8 @@ typedef double ggml_float;
 #include <immintrin.h>
 #elif defined(__riscv_v_intrinsic)
 #include <riscv_vector.h>
+#elif defined(__hexagon__)
+#include <hexagon_protos.h>
 #endif
 
 #ifdef __F16C__
